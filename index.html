@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday ❤️</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+	<!-- Music -->
+	<audio id="bgMusic" loop>
+		<source src="music.mp3" type="audio/mpeg">
+	</audio>
+
+	<!-- Music Control Button -->
+	<button id="musicBtn">🎵 Play/Pause Music</button>
+
+	<!-- Floating Hearts -->
+	<div class="hearts"></div>
+
+	<div class="wrapper">
+
+		<!-- ENVELOPE -->
+		<div class="envelope" id="envelope">
+			<p>💌 Tap to open</p>
+			<span>Music & Surprise Inside!</span>
+		</div>
+
+		<!-- LETTER -->
+		<div id="letter" class="letter hidden">
+			<h1>Happy Birthday ❤️</h1>
+			<p>Today is your special day, and I just want you to know that
+				I’m really grateful to have you in my life.</p>
+
+			<!-- Slideshow -->
+			<div class="slideshow" id="slideshow">
+				<img src="images/pic1.jpg" class="active" alt="Memory 1"> <img
+					src="images/pic2.jpg" alt="Memory 2"> <img
+					src="images/pic3.jpg" alt="Memory 3"> <img
+					src="images/pic4.jpg" alt="Memory 4">
+			</div>
+
+			<div class="extra">
+				<h2>Why You’re Special ✨</h2>
+				<ul>
+					<li>Awak selalu sabar dengan saya</li>
+					<li>Awak faham saya walaupun saya susah nak cakap</li>
+					<li>Awak selalu perhatian walaupun perkara kecil</li>
+					<li>Awak selalu support minat saya tanpa mengeluh 💜</li>
+				</ul>
+			</div>
+
+			<p class="final">I’m thankful for you — always ❤️</p>
+			<button id="surpriseBtn">🎁 Reveal Surprise</button>
+		</div>
+
+	</div>
+
+	<!-- Surprise Screen -->
+	<div id="surprise" class="hidden">
+		<div class="surprise-box">
+			<h2>🎉 Surprise! 🎉</h2>
+			<p>I love you forever and always ❤️</p>
+			<p> AND </p>
+			<p>I can’t wait to be part of your life ❤️</p>
+			<button onclick="closeSurprise()">Close</button>
+		</div>
+	</div>
+
+	<script>
+const envelope = document.getElementById("envelope");
+const letter = document.getElementById("letter");
+const music = document.getElementById("bgMusic");
+const musicBtn = document.getElementById("musicBtn");
+const slideshow = document.getElementById("slideshow");
+const surprise = document.getElementById("surprise");
+const surpriseBtn = document.getElementById("surpriseBtn");
+
+// Envelope click: smooth flip + auto play music
+envelope.addEventListener("click", () => {
+    envelope.style.transform = "rotateX(180deg)";
+    setTimeout(() => {
+        envelope.style.display = "none";
+        letter.classList.remove("hidden");
+        music.play(); // auto play music
+    }, 800);
+});
+
+// Music button toggle
+musicBtn.addEventListener("click", () => {
+    if(music.paused){
+        music.play();
+    } else {
+        music.pause();
+    }
+});
+
+// Slideshow
+let slides = slideshow.querySelectorAll("img");
+let current = 0;
+setInterval(() => {
+    slides[current].classList.remove("active");
+    current = (current+1) % slides.length;
+    slides[current].classList.add("active");
+}, 3000);
+
+// Surprise popup
+surpriseBtn.addEventListener("click", () => {
+    surprise.classList.remove("hidden");
+});
+
+function closeSurprise(){
+    surprise.classList.add("hidden");
+}
+</script>
+
+</body>
+</html>
